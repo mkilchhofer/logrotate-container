@@ -1,0 +1,19 @@
+---
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+services:
+  - docker
+
+env:
+  global:
+    - DOCKERHUB_USERNAME="kicm"
+    - IMAGE_NAME="logrotate"
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+        - ./build.sh
