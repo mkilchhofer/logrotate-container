@@ -13,8 +13,8 @@ LOGROTATE_VERSION_MINOR=$(echo "${LOGROTATE_VERSION_FULL}" | awk -F '.' '{print 
 # Login into docker hub
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
 
-# Handle master branch different
-if [ "${TRAVIS_BRANCH_STRIPPED}" == "master" ]; then
+# Handle main branch different
+if [ "${TRAVIS_BRANCH_STRIPPED}" == "main" ]; then
   IMAGE_EXACT_VERSION="${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${LOGROTATE_VERSION_FULL}-build${TRAVIS_BUILD_NUMBER}"
   IMAGE_LATEST="${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest"
   IMAGE_MAJOR="${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${LOGROTATE_VERSION_MAJOR}"
@@ -33,8 +33,8 @@ if [ "${TRAVIS_BRANCH_STRIPPED}" == "master" ]; then
   docker push "${IMAGE_MINOR}"
 
 else
-  IMAGE_NON_MASTER="${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TRAVIS_BRANCH_STRIPPED}"
+  IMAGE_NON_MAIN="${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TRAVIS_BRANCH_STRIPPED}"
 
-  docker tag myimage "${IMAGE_NON_MASTER}"
-  docker push "${IMAGE_NON_MASTER}"
+  docker tag myimage "${IMAGE_NON_MAIN}"
+  docker push "${IMAGE_NON_MAIN}"
 fi
