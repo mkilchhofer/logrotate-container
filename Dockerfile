@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.14
 
 USER root
 RUN apk --update add --no-cache logrotate && \
